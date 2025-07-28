@@ -395,7 +395,7 @@ app.get("/api/account/auth", auth, async (req, res) => {
 		if (!req.user) {
 			return res.status(401).send({
 				message: "用户未认证",
-				error: "USER_NOT_AUTHENTICATED"
+				error: "USER_NOT_AUTHENTICATED",
 			});
 		}
 
@@ -403,7 +403,7 @@ app.get("/api/account/auth", auth, async (req, res) => {
 		if (!req.user.user_name || req.user.user_id === undefined) {
 			return res.status(500).send({
 				message: "用户数据不完整",
-				error: "INCOMPLETE_USER_DATA"
+				error: "INCOMPLETE_USER_DATA",
 			});
 		}
 
@@ -412,30 +412,30 @@ app.get("/api/account/auth", auth, async (req, res) => {
 			return res.status(403).send({
 				message: "用户账户已被禁用",
 				reason: req.user.user_login_disable_reason,
-				error: "USER_ACCOUNT_DISABLED"
+				error: "USER_ACCOUNT_DISABLED",
 			});
 		}
 
 		// 正常返回用户信息
 		res.send({
 			user_name: req.user.user_name,
-			user_id: req.user.user_id
+			user_id: req.user.user_id,
 		});
 	} catch (error) {
 		console.error("获取认证信息失败:", error);
-		
+
 		// 处理特定的Mongoose错误
-		if (error.name === 'CastError') {
+		if (error.name === "CastError") {
 			return res.status(500).send({
 				message: "数据格式错误",
-				error: "DATA_FORMAT_ERROR"
+				error: "DATA_FORMAT_ERROR",
 			});
 		}
-		
+
 		// 处理其他未预期的错误
 		return res.status(500).send({
 			message: "获取认证信息时发生未知错误",
-			error: "AUTH_INFO_ERROR"
+			error: "AUTH_INFO_ERROR",
 		});
 	}
 });
