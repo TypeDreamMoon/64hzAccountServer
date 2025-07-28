@@ -1,15 +1,23 @@
+const { request } = require("express");
 const mongoose = require("mongoose");
-require('dotenv').config();
+require("dotenv").config();
 
-if (process.env.DB_USE_AUTH == 1) {
-	const url = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/`;
+const DB_HOST = process.env.DB_HOST || 'localhost';
+const DB_PORT = process.env.DB_PORT || 27017;
+const DB_NAME = process.env.DB_NAME || 'account_db';
+const DB_USE_AUTH = process.env.DB_USE_AUTH || 0;
+const DB_USER = process.env.DB_USER || '';
+const DB_PASS = process.env.DB_PASS || '';
+
+if (DB_USE_AUTH == 1) {
+	const url = `mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
 	mongoose.connect(url);
 	console.log(`Connected to MongoDB at ${url}`);
 } else {
 	mongoose.connect(
-		`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/`
+		`mongodb://${DB_HOST}:${DB_PORT}/`
 	);
-	console.log(`Connected to MongoDB at ${process.env.DB_HOST}:${process.env.DB_PORT}`);
+	console.log(`Connected to MongoDB at ${DB_HOST}:${DB_PORT}`);
 }
 
 const UserSchema = new mongoose.Schema({
