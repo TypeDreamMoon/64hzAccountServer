@@ -35,8 +35,6 @@ console.log("[DEBUG] Configuration:", {
 // 连接 MongoDB
 mongoose
 	.connect(MONGODB_URI, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
 	})
 	.then(() => console.log("[DEBUG] MongoDB connected"))
 	.catch((err) => {
