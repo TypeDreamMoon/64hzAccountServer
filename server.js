@@ -240,6 +240,7 @@ const loginLimiter = rateLimit({
 	windowMs: LOGIN_LIMITER_TIME * 60 * 1000,
 	max: LOGIN_LIMITER_MAX,
 	message: "登录尝试次数过多，请稍后再试",
+	error: "LOGIN_ATTEMPTS_TOO_MANY",
 });
 
 /**
