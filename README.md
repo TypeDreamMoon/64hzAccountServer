@@ -34,7 +34,7 @@
 
 1. 克隆项目仓库:
 
-`git clone <repository-url> cd server_auth`
+`git clone https://github.com/TypeDreamMoon/server_auth & cd server_auth`
 
 2. 安装依赖:
 
