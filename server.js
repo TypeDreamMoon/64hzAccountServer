@@ -1,11 +1,14 @@
 const { UserDatabase, ServerDatabase } = require("./models");
 const jwt = require("jsonwebtoken");
 const express = require("express");
+const rateLimit = require("express-rate-limit");
 require("dotenv").config();
 
 const SECRET = process.env.SECRET;
 const LISTEN_PORT = process.env.LISTEN_PORT || 3000;
 const LISTEN_HOST = process.env.LISTEN_HOST || "0.0.0.0";
+const LOGIN_LIMITER_MAX = process.env.LOGIN_LIMITER_MAX || 10;
+const LOGIN_LIMITER_TIME = process.env.LOGIN_LIMITER_TIME || 10; // minutes
 
 const app = express();
 app.use(express.json());
@@ -231,12 +234,11 @@ app.post("/api/account/register", async (req, res) => {
 	}
 });
 
-const rateLimit = require("express-rate-limit");
 
 // 登录接口限流
 const loginLimiter = rateLimit({
-	windowMs: 15 * 60 * 1000, // 15分钟
-	max: 5, // 限制每个IP 15分钟内最多5次登录尝试
+	windowMs: LOGIN_LIMITER_TIME * 60 * 1000,
+	max: LOGIN_LIMITER_MAX,
 	message: "登录尝试次数过多，请稍后再试",
 });
 
