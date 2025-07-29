@@ -138,4 +138,7 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-test.http
+test/
+
+localhost+2-key.pem
+localhost+2.pem
