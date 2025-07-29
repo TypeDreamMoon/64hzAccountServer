@@ -53,6 +53,8 @@
 | DB_NAME     | 登录数据库名称 `DB_USE_AUTH = 1` 才有效 |
 | LISTEN_PORT | 监听端口 默认`3001`                 |
 | LISTEN_HOST | 监听主机 默认`localhost`            |
+| LOGIN_LIMITER_MAX | 登录限制最大次数 默认`5` |
+| LOGIN_LIMITER_TIME | 登录限制时间 默认`5` 单位分钟 |
 
 ## 启动服务
 
