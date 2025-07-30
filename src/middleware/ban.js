@@ -1,4 +1,5 @@
 const { BanDatabase } = require("../models");
+const errorJson = require("../utils/errors").json;
 
 /**
 
@@ -17,10 +18,7 @@ module.exports = async (req, res, next) => {
 
 		const isBanned = await BanDatabase.exists({ user_id: userId });
 		if (isBanned) {
-			return res.status(403).json({
-				error: "USER_BANNED",
-				message: "您的账号已被封禁，如有疑问请联系管理员。",
-			});
+			return res.status(403).json(errorJson.USER_BANNED);
 		}
 
 		next();

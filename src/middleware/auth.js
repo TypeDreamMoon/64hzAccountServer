@@ -1,6 +1,8 @@
 // middleware/auth.js
 
 require("dotenv").config();
+const errorJson = require("../utils/errors").json;
+const errorCode = require("../utils/errors").code;
 const jwt = require("jsonwebtoken");
 // 和 login 时用的一致
 const SECRET = process.env.SECRET;
@@ -9,18 +11,12 @@ module.exports = (req, res, next) => {
 	// 1. 拿到 Authorization: Bearer <token>
 	const authHeader = req.headers.authorization;
 	if (!authHeader) {
-		return res.status(401).json({
-			error: "USER_NOT_AUTHENTICATED",
-			message: "未提供认证 token。",
-		});
+		return res.status(401).json(errorJson.USER_NOT_AUTHENTICATED);
 	}
 
 	const parts = authHeader.split(" ");
 	if (parts.length !== 2 || parts[0] !== "Bearer") {
-		return res.status(401).json({
-			error: "INVALID_AUTH_HEADER",
-			message: "错误的认证头格式，应为 Bearer <token>。",
-		});
+		return res.status(401).json(errorJson.INVALID_AUTH_HEADER);
 	}
 
 	const token = parts[1];
@@ -34,9 +30,6 @@ module.exports = (req, res, next) => {
 		};
 		next();
 	} catch (err) {
-		return res.status(401).json({
-			error: "INVALID_TOKEN",
-			message: "无效或已过期的 token。",
-		});
+		return res.status(401).json(errorJson.INVALID_TOKEN);
 	}
 };

@@ -1,3 +1,6 @@
+const errorCode = require("../utils/errors").code;
+const errorJson = require("../utils/errors").json;
+
 /**
  * 错误处理中间件
  */
@@ -9,7 +12,7 @@ const errorHandler = (error, req, res, next) => {
 		const fieldName = Object.keys(error.keyPattern)[0];
 		return res.status(422).send({
 			message: `${fieldName} 已存在`,
-			error: "DUPLICATE_KEY",
+			error: errorCode.USERNAME_EXISTS.code,
 		});
 	}
 
@@ -20,17 +23,14 @@ const errorHandler = (error, req, res, next) => {
 			message: err.message,
 		}));
 		return res.status(422).send({
-			message: "数据验证失败",
+			message: errorCode.VALIDATION_ERROR.message,
 			errors: errors,
-			error: "VALIDATION_ERROR",
+			error: errorCode.VALIDATION_ERROR.code,
 		});
 	}
 
 	// 其他错误
-	res.status(500).send({
-		message: "服务器内部错误",
-		error: "INTERNAL_ERROR",
-	});
+	res.status(500).send(errorJson.INTERNAL_ERROR);
 };
 
 module.exports = errorHandler;

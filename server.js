@@ -5,7 +5,7 @@ const http = require("http");
 const https = require("https");
 const express = require("express");
 const mongoose = require("mongoose");
-const routes = require("./routes");
+const routes = require("./src/routes");
 require("dotenv").config();
 
 // 应用初始化
