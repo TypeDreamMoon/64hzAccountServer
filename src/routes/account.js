@@ -16,6 +16,7 @@ const router = express.Router();
 
 // JWT 密钥
 const SECRET = process.env.JWT_SECRET || process.env.SECRET;
+const DB_SERVER_NAME = process.env.DB_SERVER_NAME || "account_server";
 
 // 登录限流：15 分钟内最多 10 次
 const loginLimiter = rateLimit({
@@ -30,7 +31,7 @@ const loginLimiter = rateLimit({
 // 获取全局用户ID 并原子递增
 async function getNextGlobalUid() {
 	const result = await ServerDatabase.findOneAndUpdate(
-		{ server_name: "account" },
+		{ server_name: DB_SERVER_NAME },
 		{ $inc: { server_global_user_counter: 1 } },
 		{ new: true, upsert: true }
 	);
