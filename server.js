@@ -34,9 +34,23 @@ console.log("[DEBUG] Configuration:", {
 
 // 连接 MongoDB
 mongoose
-	.connect(MONGODB_URI, {
+	.connect(MONGODB_URI, {})
+	.then(async () => {
+		console.log("[DEBUG] MongoDB connected");
+		const { ServerDatabase } = require("./src/models");
+		const collision = await ServerDatabase.findOne({ server_name: "account_server" });
+		if (!collision){
+			await ServerDatabase.create({
+				server_name: "account_server",
+				server_global_id: 10000,
+				server_global_user_counter: 9999,
+			});
+			console.log("[DEBUG] Server database initiailzied");
+		}
+		else{
+			console.log("[DEBUG] Server database already exists");
+		}
 	})
-	.then(() => console.log("[DEBUG] MongoDB connected"))
 	.catch((err) => {
 		console.error("[ERROR] MongoDB connection error:", err);
 		process.exit(1);
