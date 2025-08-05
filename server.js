@@ -19,6 +19,7 @@ const HTTP_PORT = process.env.HTTP_PORT || 3000;
 const HTTPS_PORT = process.env.HTTPS_PORT || 3443;
 const ENABLE_HTTPS = process.env.ENABLE_HTTPS == 1;
 const SSL_KEY_PATH = process.env.SSL_KEY_PATH || "./certs/localhost+2-key.pem";
+const SSL_CERT_PATH = process.env.SSL_CERT_PATH || "./certs/localhost+2.pem";
 
 const { DB_USE_AUTH, DB_USER, DB_NAME, DB_PASS, DB_HOST, DB_PORT } = process.env;
 const MONGODB_URI = (DB_USE_AUTH === "1") ? `mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}` : `mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`;
