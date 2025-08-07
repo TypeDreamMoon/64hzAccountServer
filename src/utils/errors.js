@@ -52,17 +52,21 @@ module.exports = {
 			code: "INTERNAL_ERROR",
 			message: "服务器内部错误，请稍后重试。",
 		},
-        VALIDATION_ERROR: {
-            code: "VALIDATION_ERROR",
-            message: "数据验证失败",
-        },
+		VALIDATION_ERROR: {
+			code: "VALIDATION_ERROR",
+			message: "数据验证失败",
+		},
+		NO_BAN_PERMISSION: {
+			code: "NO_BAN_PERMISSION",
+			message: "无封禁权限，非管理员白名单用户。",
+		},
 		NORMAL: {
 			code: "NORMAL",
 			message: "正常",
 		},
 	},
-    json: {
-        MISSING_FIELDS: {
+	json: {
+		MISSING_FIELDS: {
 			error: "MISSING_FIELDS",
 			message: "缺少必填字段。",
 		},
@@ -114,13 +118,17 @@ module.exports = {
 			error: "INTERNAL_ERROR",
 			message: "服务器内部错误，请稍后重试。",
 		},
-        VALIDATION_ERROR: {
-            error: "VALIDATION_ERROR",
-            message: "数据验证失败",
-        },
+		VALIDATION_ERROR: {
+			error: "VALIDATION_ERROR",
+			message: "数据验证失败",
+		},
+		NO_BAN_PERMISSION: {
+			error: "NO_BAN_PERMISSION",
+			message: "无封禁权限，非管理员白名单用户。",
+		},
 		NORMAL: {
 			error: "NORMAL",
 			message: "正常",
 		},
-    }
+	},
 };

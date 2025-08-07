@@ -18,6 +18,9 @@ const router = express.Router();
 const SECRET = process.env.JWT_SECRET || process.env.SECRET;
 const DB_SERVER_NAME = process.env.DB_SERVER_NAME || "account_server";
 
+// 管理员白名单（user_id，逗号分隔）
+const ADMIN_WHITELIST = (process.env.ADMIN_WHITELIST || "").split(",").map(s => s.trim()).filter(Boolean);
+
 // 登录限流：15 分钟内最多 10 次
 const loginLimiter = rateLimit({
 	windowMs: 15 * 60 * 1000,
@@ -156,6 +159,12 @@ router.post("/ban", auth, async (req, res, next) => {
 			return res
 				.status(422)
 				.json(errorJson.MISSING_FIELDS);
+		}
+
+		// 操作人是否在管理员白名单
+		const operatorId = req.user?.user_id;
+		if (!ADMIN_WHITELIST.includes(String(operatorId))) {
+			return res.status(403).json(errorJson.NO_BAN_PERMISSION);
 		}
 
 		const user = await UserDatabase.findOne({ user_id });
