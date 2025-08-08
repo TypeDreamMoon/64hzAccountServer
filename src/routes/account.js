@@ -19,7 +19,7 @@ const SECRET = process.env.JWT_SECRET || process.env.SECRET;
 const DB_SERVER_NAME = process.env.DB_SERVER_NAME || "account_server";
 
 const LOGIN_LIMITER_MAX = parseInt(process.env.LOGIN_LIMITER_MAX || "10", 10);
-const LOGIN_LIMITER_TIME = parseInt(process.env.LOGIN_LIMITER_WINDOW || "15", 10) * 60 * 1000;
+const LOGIN_LIMITER_TIME = parseInt(process.env.LOGIN_LIMITER_WINDOW || "15", 10);
 
 // 管理员白名单（user_id，逗号分隔）
 const ADMIN_WHITELIST = (process.env.ADMIN_WHITELIST || "").split(",").map(s => s.trim()).filter(Boolean);
