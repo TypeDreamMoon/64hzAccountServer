@@ -88,7 +88,7 @@ Authorization: Bearer <token>
 
 ```json
 {
-	"code": "ERROR_CODE",
+	"error": "ERROR_CODE",
 	"message": "错误信息"
 }
 ```

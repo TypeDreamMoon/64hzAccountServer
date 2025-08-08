@@ -75,7 +75,7 @@ router.post("/register", async (req, res, next) => {
 
 		res.status(201).json({
 			message: "用户注册成功",
-      error: errorCode.NORMAL.code,
+      		error: errorCode.NORMAL.code,
 			user: { user_name: user.user_name, user_id: user.user_id },
 		});
 	} catch (err) {
