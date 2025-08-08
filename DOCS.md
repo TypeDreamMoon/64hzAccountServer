@@ -92,7 +92,7 @@ DOCS.md                  # 项目文档
 
 ```json
 {
-	"code": "ERROR_CODE",
+	"error": "ERROR_CODE",
 	"message": "错误信息"
 }
 ```
@@ -115,7 +115,7 @@ DOCS.md                  # 项目文档
 | INVALID_TOKEN          | 无效或已过期的 Token。                    |
 | INTERNAL_ERROR         | 服务器内部错误，请稍后重试。              |
 | VALIDATION_ERROR       | 数据验证失败                              |
-| NO_BAN_PERMISSION      | 无权限                                    |
+| NO_PERMISSION          | 无权限                                    |
 | NORMAL                 | 正常                                      |
 
 ---
@@ -137,6 +137,7 @@ DOCS.md                  # 项目文档
 | server_name                | String | 服务器名称     |
 | server_global_id           | Number | 服务器全局 ID  |
 | server_global_user_counter | Number | 用户 ID 计数器 |
+| server_global_admin_ids    | Array  | 管理员 ID 列表 |
 
 ### 封禁模型（Ban）
 
@@ -169,6 +170,5 @@ DOCS.md                  # 项目文档
 | LOGIN_LIMITER_MAX  | 登录限制最大次数               | 否       | 5                   |
 | LOGIN_LIMITER_TIME | 登录限制时间（分钟）           | 否       | 5                   |
 | DB_SERVER_NAME     | 服务器数据库名称（全局参数）   | 否       | account_server      |
-| ADMIN_WHITELIST    | 管理员白名单                   | 是       | 10000,10001         |
 
 如需详细接口参数、返回示例，请参考 [API.md](API.md)。

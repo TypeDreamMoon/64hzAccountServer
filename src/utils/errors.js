@@ -122,9 +122,9 @@ module.exports = {
 			error: "VALIDATION_ERROR",
 			message: "数据验证失败",
 		},
-		NO_BAN_PERMISSION: {
-			error: "NO_BAN_PERMISSION",
-			message: "无封禁权限，非管理员白名单用户。",
+		NO_PERMISSION: {
+			error: "NO_PERMISSION",
+			message: "无权限，非管理员。",
 		},
 		NORMAL: {
 			error: "NORMAL",
