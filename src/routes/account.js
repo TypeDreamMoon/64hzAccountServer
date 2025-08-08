@@ -18,13 +18,16 @@ const router = express.Router();
 const SECRET = process.env.JWT_SECRET || process.env.SECRET;
 const DB_SERVER_NAME = process.env.DB_SERVER_NAME || "account_server";
 
+const LOGIN_LIMITER_MAX = parseInt(process.env.LOGIN_LIMITER_MAX || "10", 10);
+const LOGIN_LIMITER_TIME = parseInt(process.env.LOGIN_LIMITER_WINDOW || "15", 10) * 60 * 1000;
+
 // 管理员白名单（user_id，逗号分隔）
 const ADMIN_WHITELIST = (process.env.ADMIN_WHITELIST || "").split(",").map(s => s.trim()).filter(Boolean);
 
-// 登录限流：15 分钟内最多 10 次
+// 登录限流：LOGIN_LIMITER_TIME 分钟内最多 LOGIN_LIMITER_MAX 次
 const loginLimiter = rateLimit({
-	windowMs: 15 * 60 * 1000,
-	max: 10,
+	windowMs: LOGIN_LIMITER_TIME * 60 * 1000,
+	max: LOGIN_LIMITER_MAX,
 	message: {
 		error: "TOO_MANY_REQUESTS",
 		message: "请求过于频繁，请稍后再试。",
